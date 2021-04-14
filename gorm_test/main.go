@@ -61,14 +61,14 @@ func main() {
 	for k, v := range []rune("赵钱孙李") {
 		println(k, string(v))
 		fdepartment.Dname = string(v) + "部"
-		fdepartment.Mgrssn = "3333" + strconv.Itoa(k)
+		fdepartment.Mgrssn = "1232" + strconv.Itoa(k)
 		fdepartment.Mgrstartdate = time.Now()
 		fdepartment.Dno = k + 1
 		db.Table("DEPARTMENT").Create(fdepartment)
 	}
 	fdepartment.Dno = 5
 	fdepartment.Dname = "研发" + "部"
-	fdepartment.Mgrssn = "33334"
+	fdepartment.Mgrssn = "12324"
 	db.Table("DEPARTMENT").Create(fdepartment)
 
 	fproject := &Project{
@@ -96,7 +96,7 @@ func main() {
 	for k, v := range []rune("赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢") {
 		println(k, string(v))
 		fwork.Essn = "1232" + strconv.Itoa(k)
-		fwork.Pno = k + 1
+		fwork.Pno = k%10 + 1
 		fwork.Hours = rand.Intn(10) + 1
 		db.Table("WORKS_ON").Create(fwork)
 	}
@@ -117,7 +117,7 @@ func main() {
 		femployee.Essn = "1232" + strconv.Itoa(k)
 		femployee.Address = "快乐老家"
 		femployee.Dno = k%5 + 1
-		femployee.Superssn = "3333" + strconv.Itoa(k%5)
+		femployee.Superssn = "1232" + strconv.Itoa(k%5)
 		db.Table("EMPLOYEE").Create(femployee)
 	}
 }
