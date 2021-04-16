@@ -48,7 +48,7 @@ func Connect() *gorm.DB {
 	}
 }
 
-func main() {
+func InsertData() {
 	db := Connect()
 
 	fdepartment := &Department{
@@ -120,4 +120,8 @@ func main() {
 		femployee.Superssn = "1232" + strconv.Itoa(k%5)
 		db.Table("EMPLOYEE").Create(femployee)
 	}
+}
+
+func main() {
+	InsertData()
 }
