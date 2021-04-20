@@ -82,7 +82,7 @@ func Question5(db *gorm.DB, args ...string) {
 
 	res := []Res{}
 
-	db.Raw("SELECT DISTINCT EMPLOYEE.ENAME FROM EMPLOYEE,WORKS_ON WHERE EMPLOYEE.ESSN=WORKS_ON.ESSN AND PNO!=?;", args[0]).Scan(&res)
+	db.Raw("SELECT EMPLOYEE.ENAME FROM EMPLOYEE LEFT JOIN (SELECT DISTINCT EMPLOYEE.ENAME FROM EMPLOYEE,WORKS_ON WHERE WORKS_ON.PNO=1 AND EMPLOYEE.ESSN=WORKS_ON.ESSN)A ON A.ENAME=EMPLOYEE.ENAME WHERE A.ENAME IS NULL;", args[0]).Scan(&res)
 
 	for k, v := range res {
 		fmt.Printf("%d %s\n", k, v.Ename)
@@ -153,11 +153,11 @@ func WorkLine() {
 	//Question2(db, "赵工程")
 	//Question3(db, "Research Department")
 	//Question4(db, "周部1", 2000)
-	//Question5(db, "1")
+	Question5(db, "1")
 	//Question6(db, "张红")
 	//Question7(db, "1", "2")
 	//Question8(db, 5000)
-	Question9(db, 3, 8)
+	//Question9(db, 3, 8)
 }
 
 func main() {
